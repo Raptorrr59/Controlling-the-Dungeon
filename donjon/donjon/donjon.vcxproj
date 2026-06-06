@@ -153,6 +153,8 @@
     <ClInclude Include="AnimationData.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="BoxColliderComponent.h" />
+    <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CollisionTypes.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Player.h" />

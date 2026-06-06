@@ -6,6 +6,7 @@
 #include <ranges>
 #include <concepts>
 #include <algorithm>
+#include "CameraManager.h"
 
 class World {
 public:
@@ -30,17 +31,16 @@ public:
             actor->tick(deltaTime);
         }
 
-        // Gestion des triggers et dégâts à chaque frame
+        CameraManager::getInstance().tick(deltaTime);
         processOverlaps();
     }
 
     void draw(sf::RenderTarget& target) const {
+        CameraManager::getInstance().applyView(Window::getWindow());
         for (auto& actor : _actors) {
             target.draw(*actor);
         }
     }
-
-    // --- C++23 RANGES & VIEWS ---
 
     auto getAllActors() {
         return _actors | std::views::all;
@@ -60,7 +60,6 @@ public:
     template<typename T>
     auto getActorsWithComponent() {
         return _actors | std::views::filter([](const auto& actor) {
-            // CORRECTION : Utilisation de != nullptr car tes composants sont des shared_ptr
             return actor->template getComponent<T>() != nullptr;
             });
     }
@@ -69,20 +68,16 @@ public:
         requires (sizeof...(Components) > 0)
     auto getActorsWithComponents() {
         return _actors | std::views::filter([](const auto& actor) {
-            // CORRECTION : Même chose ici pour les packs de composants
             return ((actor->template getComponent<Components>() != nullptr) && ...);
             });
     }
 
-    // --- SYSTÈME DE COLLISION ---
 
     bool checkMoveCollision(const BoxColliderComponent& targetCollider, sf::Vector2f& outRepulsion) {
         outRepulsion = { 0.0f, 0.0f };
 
-        // On récupère la vue filtrée via les ranges
         auto actorRange = getActorsWithComponent<BoxColliderComponent>();
 
-        // Convertit la vue en vecteur de shared_ptr local pour itérer de façon stable
         std::vector<std::shared_ptr<Actor>> targetActors;
         for (auto actor : actorRange) {
             targetActors.push_back(actor);
