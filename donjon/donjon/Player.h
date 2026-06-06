@@ -34,10 +34,10 @@ public:
             if (direction.x != 0.0f || direction.y != 0.0f) {
                 auto t = this->getComponent<TransformComponent>();
                 if (direction.x < 0.0f) {
-                    t->setScale({ -1.0f,1.0f });
+                    t->setScale({ -0.6f,0.6f });
                 }
                 else {
-                    t->setScale({ 1.0f,1.0f });
+                    t->setScale({ 0.6f,0.6f });
                 }
                 mesh->playAnimation("Walk");
             }
