@@ -13,15 +13,74 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{6e94bc2e-e8ad-48be-aa7e-216329c1ad99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Base">
+      <UniqueIdentifier>{01f99913-20ce-42c4-817b-8566ff5e654d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Base\ActorComponent">
+      <UniqueIdentifier>{7e43da6b-14a0-4fc2-92d0-eef126856d65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Base\ActorComponent\Render">
+      <UniqueIdentifier>{b5051e99-a6f2-48b7-99e7-b9e15a15db40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{87d462da-0c64-49d0-9e69-fe36a0a42864}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="donjon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h">
+      <Filter>Header Files\Engine\Base</Filter>
+    </ClInclude>
     <ClInclude Include="Window.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorComponent.h">
+      <Filter>Header Files\Engine\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>Header Files\Engine\Base\ActorComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformcomponent.h">
+      <Filter>Header Files\Engine\Base\ActorComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeComponent.h">
+      <Filter>Header Files\Engine\Base\ActorComponent\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Header Files\Engine\Base\ActorComponent\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartTextureLoader.h">
+      <Filter>Header Files\Engine\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletalMeshComponent.h">
+      <Filter>Header Files\Engine\Base\ActorComponent\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticMeshComponent.h">
+      <Filter>Header Files\Engine\Base\ActorComponent\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\assets\player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

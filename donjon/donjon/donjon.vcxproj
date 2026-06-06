@@ -117,7 +117,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\maxju\Downloads\SFML-3.1.0-windows-vc17-64-bit\SFML-3.1.0\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -146,9 +146,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="donjon.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="ActorComponent.h" />
+    <ClInclude Include="AnimationData.h" />
+    <ClInclude Include="MovementComponent.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="ShapeComponent.h" />
+    <ClInclude Include="SkeletalMeshComponent.h" />
+    <ClInclude Include="SmartTextureLoader.h" />
+    <ClInclude Include="StaticMeshComponent.h" />
+    <ClInclude Include="Transformcomponent.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\assets\player.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

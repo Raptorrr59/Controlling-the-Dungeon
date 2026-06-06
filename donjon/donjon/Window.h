@@ -21,6 +21,7 @@ public:
 private:
     Window(unsigned int width, unsigned int height, const std::string& title) {
         create(sf::VideoMode(sf::Vector2u(width, height)), title);
+        setFramerateLimit(144);
     }
 
     inline static std::unique_ptr<Window> _instance = nullptr;
