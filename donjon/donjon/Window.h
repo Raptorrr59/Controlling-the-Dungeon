@@ -1,22 +1,27 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
+#include <string>
+#include <memory>
 
 class Window : public sf::RenderWindow {
 public:
     Window(const Window&) = delete;
     Window& operator=(const Window&) = delete;
 
-    inline void close() {
-        sf::RenderWindow::close();
+    ~Window() = default;
+
+    static void createInstance(unsigned int width, unsigned int height, const std::string& title) {
+        _instance = std::unique_ptr<Window>(new Window(width, height, title));
     }
 
-    inline static [[nodiscard]] Window& getWindow() {
-        static Window window;
-        return window;
+    static Window& getWindow() {
+        return *_instance;
     }
 
 private:
-    Window() : sf::RenderWindow(sf::VideoMode({ 800, 600 }), "My window") {}
-    ~Window() = default;
+    Window(unsigned int width, unsigned int height, const std::string& title) {
+        create(sf::VideoMode(sf::Vector2u(width, height)), title);
+    }
+
+    inline static std::unique_ptr<Window> _instance = nullptr;
 };

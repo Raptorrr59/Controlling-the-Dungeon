@@ -3,6 +3,7 @@
 
 int main()
 {
+    Window::createInstance(1920, 1080, "test");
     Window &window = Window::getWindow();
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
