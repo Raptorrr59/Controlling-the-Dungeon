@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "World.h"
 #include "Player.h"
+#include "Block.h"
 
 int main()
 {
@@ -11,6 +12,7 @@ int main()
     World& world = World::getWorld();
 
     auto p = World::getWorld().spawnActor<Player>(sf::Vector2f{ 640.0f, 360.0f });
+    auto b = World::getWorld().spawnActor<Block>(sf::Vector2f{ 640.0f, 360.0f });
 
     if (auto pv = p.lock()) {
         pv->getComponent<TransformComponent>()->setPosition(sf::Vector2f{ 100.0f, 100.0f });

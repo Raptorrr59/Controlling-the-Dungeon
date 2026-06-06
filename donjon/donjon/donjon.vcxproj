@@ -145,6 +145,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="donjon.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
@@ -152,9 +153,13 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="ActorComponent.h" />
     <ClInclude Include="AnimationData.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="BoxColliderComponent.h" />
+    <ClInclude Include="CollisionTypes.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ShapeComponent.h" />
     <ClInclude Include="SkeletalMeshComponent.h" />
     <ClInclude Include="SmartTextureLoader.h" />
