@@ -30,7 +30,6 @@ public:
     }
 
     void tick(float deltaTime) {
-        std::cout << _shakeTimer << std::endl;;
         auto cam = _activeCamera.lock();
         if (!cam) return;
 

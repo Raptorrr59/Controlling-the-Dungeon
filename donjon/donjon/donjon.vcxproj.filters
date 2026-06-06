@@ -96,10 +96,10 @@
       <Filter>Header Files\Engine\Base\ActorComponent\Render</Filter>
     </ClInclude>
     <ClInclude Include="CameraComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Engine\Base\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CameraManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Engine\Base\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
