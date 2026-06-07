@@ -69,6 +69,9 @@ public:
 
     std::shared_ptr<TransformComponent> getTransform() const { return _transform; }
 
+    bool isPendingKill() const { return _bIsPendingKill; }
+    void destroy() { _bIsPendingKill = true; }
+
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
         if (_transform) {
@@ -82,6 +85,7 @@ protected:
     }
 
 private:
+    bool _bIsPendingKill{ false };
     std::shared_ptr<TransformComponent> _transform;
     std::vector<std::shared_ptr<RenderComponent>> _renderComponents;
     std::unordered_map<std::type_index, std::shared_ptr<ActorComponent>> _components;

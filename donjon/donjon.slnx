@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="donjon/donjon.vcxproj" />
+  <Project Path="donjon/donjon.vcxproj" Id="b1d0c60a-64ea-4bbf-b56e-2c22aa82c2eb" />
 </Solution>

@@ -34,6 +34,7 @@ public:
             }
 
             _sprite.setTextureRect(it->second.frames[_currentFrameIndex]);
+            updateOrigin();
         }
     }
 
@@ -62,6 +63,7 @@ public:
             }
 
             _sprite.setTextureRect(anim.frames[_currentFrameIndex]);
+            updateOrigin();
         }
     }
 
@@ -71,6 +73,11 @@ protected:
     }
 
 private:
+    void updateOrigin() {
+        sf::IntRect rect = _sprite.getTextureRect();
+        _sprite.setOrigin({ rect.size.x / 2.0f, rect.size.y / 2.0f });
+    }
+
     sf::Sprite _sprite;
     std::unordered_map<std::string, AnimationData> _animations;
     std::string _currentAnimationName;

@@ -9,6 +9,8 @@ public:
         : RenderComponent(owner),
         _sprite(SmartTextureLoader::getTexture(texturePath))
     {
+        sf::Vector2u size = _sprite.getTexture().getSize();
+        _sprite.setOrigin({ size.x / 2.0f, size.y / 2.0f });
     }
 
     void setTextureRect(const sf::IntRect& rect) {

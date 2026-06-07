@@ -10,10 +10,10 @@
 class BoxColliderComponent : public RenderComponent {
 public:
     
-    inline static bool bShowDebugColliders = true;
+    inline static bool bShowDebugColliders = false;
 
-    BoxColliderComponent(Actor* owner, const sf::Vector2f& size = { 32.0f, 32.0f })
-        : RenderComponent(owner), _size(size) {
+    BoxColliderComponent(Actor* owner, const sf::Vector2f& size = { 32.0f, 32.0f }, bool bCenterOrigin = false)
+        : RenderComponent(owner), _size(size), _bCenterOrigin(bCenterOrigin) {
 
         for (int i = 0; i < static_cast<int>(ECollisionChannel::MAX); ++i) {
             _responseMap[static_cast<ECollisionChannel>(i)] = ECollisionResponse::Block;
@@ -23,6 +23,9 @@ public:
         _debugShape.setSize(_size);
         _debugShape.setFillColor(sf::Color::Transparent);
         _debugShape.setOutlineThickness(1.0f);
+        if (_bCenterOrigin) {
+            _debugShape.setOrigin(_size / 2.0f);
+        }
         setDebugColorByChannel();
     }
 
@@ -55,11 +58,21 @@ public:
             scale = t->getScale();
         }
 
+        sf::Vector2f scaledSize(std::abs(_size.x * scale.x), std::abs(_size.y * scale.y));
+        sf::Vector2f finalPos = pos;
         
-        sf::Vector2f scaledSize(_size.x * scale.x, _size.y * scale.y);
+        if (_bCenterOrigin) {
+            finalPos = pos - (scaledSize / 2.0f);
+        } else {
+            if (scale.x < 0.0f) {
+                finalPos.x -= scaledSize.x;
+            }
+            if (scale.y < 0.0f) {
+                finalPos.y -= scaledSize.y;
+            }
+        }
 
-        
-        return sf::FloatRect(pos, scaledSize);
+        return sf::FloatRect(finalPos, scaledSize);
     }
 
     std::function<void(Actor* otherActor)> onComponentBeginOverlap;
@@ -106,4 +119,5 @@ private:
     std::unordered_map<ECollisionChannel, ECollisionResponse> _responseMap;
 
     mutable sf::RectangleShape _debugShape;
+    bool _bCenterOrigin{ false };
 };

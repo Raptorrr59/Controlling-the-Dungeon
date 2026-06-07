@@ -21,25 +21,48 @@ public:
     template<typename T, typename... Args>
     std::weak_ptr<T> spawnActor(Args&&... args) {
         auto actor = std::make_shared<T>(std::forward<Args>(args)...);
-        _actors.push_back(actor);
-        actor->beginPlay();
+        _pendingActors.push_back(actor);
         return actor;
     }
 
     void tick(float deltaTime) {
+        // Safely flush pending actors into the main list
+        if (!_pendingActors.empty()) {
+            std::vector<std::shared_ptr<Actor>> temp = std::move(_pendingActors);
+            _pendingActors.clear();
+            for (auto& actor : temp) {
+                _actors.push_back(actor);
+                actor->beginPlay();
+            }
+        }
+
         for (auto& actor : _actors) {
-            actor->tick(deltaTime);
+            if (!actor->isPendingKill()) {
+                actor->tick(deltaTime);
+            }
         }
 
         CameraManager::getInstance().tick(deltaTime);
         processOverlaps();
+
+        // Clean up pending kill actors
+        _actors.erase(std::remove_if(_actors.begin(), _actors.end(), [](const auto& actor) {
+            return actor->isPendingKill();
+        }), _actors.end());
     }
 
     void draw(sf::RenderTarget& target) const {
         CameraManager::getInstance().applyView(Window::getWindow());
         for (auto& actor : _actors) {
-            target.draw(*actor);
+            if (!actor->isPendingKill()) {
+                target.draw(*actor);
+            }
         }
+    }
+
+    void clearAllActors() {
+        _actors.clear();
+        CameraManager::getInstance().setActiveCamera(nullptr);
     }
 
     auto getAllActors() {
@@ -122,10 +145,12 @@ public:
         if (targetActors.size() < 2) return;
 
         for (size_t i = 0; i < targetActors.size(); ++i) {
+            if (targetActors[i]->isPendingKill()) continue;
             auto colA = targetActors[i]->getComponent<BoxColliderComponent>();
             if (!colA) continue;
 
             for (size_t j = i + 1; j < targetActors.size(); ++j) {
+                if (targetActors[j]->isPendingKill()) continue;
                 auto colB = targetActors[j]->getComponent<BoxColliderComponent>();
                 if (!colB) continue;
 
@@ -148,4 +173,5 @@ private:
     ~World() = default;
 
     std::vector<std::shared_ptr<Actor>> _actors;
+    std::vector<std::shared_ptr<Actor>> _pendingActors;
 };
