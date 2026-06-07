@@ -23,7 +23,7 @@ struct AnimationData {
         sf::Vector2u size = image.getSize();
         if (size.x == 0 || size.y == 0) return anim;
 
-        unsigned int safeHeight = (size.y > 15) ? size.y - 15 : size.y;
+        unsigned int safeHeight = size.y;
         std::vector<int> density(size.x, 0);
 
         for (unsigned int x = 0; x < size.x; ++x) {
